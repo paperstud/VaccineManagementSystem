@@ -1,0 +1,24 @@
+﻿<form method="post" id="addform">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" class="form-control" id="Name" name="Name" required />
+
+    </div>
+
+
+
+    <div class="form-group">
+        <label for="DosesRequired">Doses Required</label>
+        <select name="DosesRequired" id="DosesRequired" form="addform">
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="DaysBetween">Days Between Doses</label>
+        <input type="number" class="form-control" id="DaysBetween" name="DaysBetween" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
