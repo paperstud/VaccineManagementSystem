@@ -9,7 +9,9 @@ namespace Homework02.Models
     {
 
         public string Name { get; set; }
-        public int TotalDoses { get; set; }
+        public int TotalDosesRecieved { get; set; }
+        public int TotalDosesLeft { get; set; }
+
         public int Id { get; set; }
         public int? daysBetween;
         public int dosesRequired;
@@ -41,11 +43,12 @@ namespace Homework02.Models
 
 
         public Vaccine() { }
-        public Vaccine(int id, string name, int totalDoses , int dosesRequired, int? daysBetween)
+        public Vaccine(int id, string name, int totalDosesRecieved , int totalDosesLeft , int dosesRequired, int? daysBetween)
         {
             Id = id;
             Name = name;
-            TotalDoses = totalDoses;
+            TotalDosesRecieved = totalDosesRecieved;
+            TotalDosesLeft = totalDosesLeft;
             DosesRequired = dosesRequired;
             DaysBetween = daysBetween;
 
@@ -60,7 +63,8 @@ namespace Homework02.Models
             else
                 s += DaysBetween.ToString();
 
-            s += $"\nTotal Doses: {TotalDoses}\n";
+            s += $"\nTotal Doses Recieved: {TotalDosesRecieved}\n";
+            s += $"\nTotal Doses Left: {TotalDosesLeft}\n";
             return s;
         }
 

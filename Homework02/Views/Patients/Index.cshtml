@@ -1,0 +1,53 @@
+﻿@model List<Patient>
+
+    <h5><a href="Patients/Add">Add Patient</a> </h5>
+    <br />
+
+    <table class="table">
+        <thead>
+            <tr><th>ID</th><th>Name</th><th>Vaccine</th><th>1st Dose</th><th>2nd Dose</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var patient in Model)
+            {
+            <tr>
+                <td>@patient.Id</td>
+                <td>@patient.Name</td>
+                <td>
+                    @if (patient.Vaccine != null)
+                {
+                    @patient.Vaccine.Name
+                }
+                </td>
+                <td>
+                    @patient.FirstDose.ToShortDateString()
+
+                </td> 
+                <td>
+                    @if (patient.Vaccine.DosesRequired == 1)
+                    {
+                        <p>-</p>
+                    }
+
+                    else if (patient.SecondDose != null)
+                    {
+                        @patient.SecondDose.Value.ToString("MM/dd/yyyy")
+                    }
+
+                    else if (patient.Vaccine.TotalDosesLeft <= 0)
+                    {
+                    <p>Out of Stock</p>
+                    }
+
+                    else if (patient.SecondDose == null)
+                    {
+                    <a href="Patients/Recieve/@patient.Id">Recieved</a>
+                    }
+
+                </td>
+            </tr>
+    }
+        </tbody>
+
+
+    </table>

@@ -10,7 +10,7 @@ namespace Homework02.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime FirstDose { get; set; }
-        public DateTime SecondDose { get; set; }
+        public DateTime? SecondDose { get; set; }
         public virtual Vaccine Vaccine { get; set; }
 
         public override string ToString()

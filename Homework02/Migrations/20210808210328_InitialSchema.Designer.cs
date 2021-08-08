@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Homework02.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210808004844_InitialSchema")]
+    [Migration("20210808210328_InitialSchema")]
     partial class InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,32 @@ namespace Homework02.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Homework02.Models.Patient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("FirstDose")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SecondDose")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("VaccineId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VaccineId");
+
+                    b.ToTable("Patients");
+                });
 
             modelBuilder.Entity("Homework02.Models.Vaccine", b =>
                 {
@@ -37,12 +63,24 @@ namespace Homework02.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TotalDoses")
+                    b.Property<int>("TotalDosesLeft")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalDosesRecieved")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Vaccines");
+                });
+
+            modelBuilder.Entity("Homework02.Models.Patient", b =>
+                {
+                    b.HasOne("Homework02.Models.Vaccine", "Vaccine")
+                        .WithMany()
+                        .HasForeignKey("VaccineId");
+
+                    b.Navigation("Vaccine");
                 });
 #pragma warning restore 612, 618
         }
